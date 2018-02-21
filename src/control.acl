@@ -1,0 +1,61 @@
+/**
+ * Sample access control list.
+ */
+rule EverybodyCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.acme.sample.Student"
+    operation: READ
+    resource: "org.acme.sample.*"
+    action: ALLOW
+}
+rule AddBook {
+    description: "Allow admins to add books"
+    participant: "org.acme.sample.Admin"
+    operation: ALL
+    resource: "org.acme.sample.*"
+    action: ALLOW
+}
+rule IssueBook {
+    description: "Allow student to get book issued"
+    participant: "org.acme.sample.Student"
+    operation: CREATE
+    resource: "org.acme.sample.issueBook"
+    action: ALLOW
+}
+rule ReturnBook {
+    description: "Allow student to return book"
+    participant: "org.acme.sample.Student"
+    operation: CREATE
+    resource: "org.acme.sample.returnBook"
+    action: ALLOW
+}
+rule transferBook {
+    description: "Allow student to transfer book"
+    participant: "org.acme.sample.Student"
+    operation: CREATE
+    resource: "org.acme.sample.transferBook"
+    action: ALLOW
+}
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}

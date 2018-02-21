@@ -1,0 +1,47 @@
+/**
+ * Sample business network definition.
+ */
+namespace org.acme.sample
+
+asset Book identified by bookid {
+	o String bookid
+    o String bookdesc
+    o String booktitle
+    o DateTime issue
+    o DateTime rturn
+    o String lib
+    --> Student Owner 
+}
+participant Student identified by studentid {
+  o String studentid
+  o String firstName
+  o String lastName
+  o Integer fine
+}
+participant Admin identified by adminid {
+  o String adminid
+  o String firstName
+  o String lastName
+}
+participant Library identified by libid {
+  o String libid
+  o String LibName
+  o String LibAdd
+}
+transaction returnBook{
+  --> Book book
+  --> Student student
+}
+transaction issueBook{
+  --> Book book
+  --> Student student
+}
+transaction transferBook{
+  --> Book book
+  --> Student student1
+  --> Student student2
+}
+transaction addBook{
+  --> Admin admin
+  --> Book book
+}
